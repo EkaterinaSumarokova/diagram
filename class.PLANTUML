@@ -1,0 +1,55 @@
+@startuml
+
+class User {
+  - id: int
+  - username: String
+  - password: String
+  - results: List<Result>
+}
+
+class TheoryTopic {
+  - id: int
+  - title: String
+  - content: String
+}
+
+class Test {
+  - id: int
+  - topic: TheoryTopic
+  - questions: List<Question>
+}
+
+class Question {
+  - id: int
+  - text: String
+  - answers: List<Answer>
+  - correctAnswerIndex: int
+}
+
+class Answer {
+  - id: int
+  - text: String
+}
+
+class Result {
+  - id: int
+  - test: Test
+  - user: User
+  - score: double
+  - date: Date
+}
+
+class Statistics {
+  - user: User
+  - averageScore: double
+  - completedTests: int
+}
+
+User "1" --> "many" Result
+Result "1" --> "1" Test
+Test "1" --> "many" Question
+Question "1" --> "many" Answer
+Test "1" --> "1" TheoryTopic
+Statistics "1" --> "1" User
+
+@enduml
