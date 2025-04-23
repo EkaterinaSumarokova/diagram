@@ -1,0 +1,20 @@
+@startuml
+actor User
+participant AppUI
+participant TestService
+participant ResultService
+
+User -> AppUI : выбрать тест
+AppUI -> TestService : getTest(testId)
+TestService -> AppUI : вернуть Test
+
+loop для каждого вопроса
+    User -> AppUI : выбрать ответ
+end
+
+AppUI -> TestService : submitAnswers()
+TestService -> TestService : рассчитать результат
+TestService -> ResultService : сохранить результат
+ResultService -> AppUI : подтвердить сохранение
+
+@enduml
